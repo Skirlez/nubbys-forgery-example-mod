@@ -1,0 +1,23 @@
+-- In this file you will register your mods' sprites.
+
+-- You should use the register_mod_sprite(sprite, mod_id, name) function provided.
+-- That way, you can access your sprite again with get_mod_sprite(mod_id, name), and it will
+-- be cleaned up for you automatically when your mod is unloaded.
+
+
+
+-- In this case, my sprites are spritesheets, so I will add them with sprite_add().
+-- Since it is a gamemaker function, it wants the full path to the sprite. We will obtain it
+-- using mod_get_path().
+
+
+
+local spring_sprite_path = mod_get_path("sprites/spr_spring_item.png");
+spring_sprite = sprite_add(spring_sprite_path, 16, false, false, 48, 48);
+
+register_mod_sprite(spring_sprite, "spr_spring_item")
+
+local spring_upgrade_sprite_path = mod_get_path("sprites/spr_spring_item_upgrade.png");
+spring_upgrade_sprite = sprite_add(spring_upgrade_sprite_path, 16, false, false, 48, 48);
+
+register_mod_sprite(spring_upgrade_sprite, "spr_spring_item_upgrade")
