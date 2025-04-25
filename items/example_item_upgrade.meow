@@ -1,0 +1,130 @@
+-- One way of having upgrade items is just copying the way you make the base item,
+-- and changing the variables you need.
+
+construct = fun {
+    -- Reliable way to get your own mod ID
+    let mod_id = global.currently_executing_mod.mod_id
+
+    -- The struct we are creating
+    item = {}
+
+    -- display_name: The translation key of the item's name
+    item.display_name = identifier(mod_id, "example_item_upgrade_name")
+
+    -- The translation key of the item's description
+    item.description = identifier(mod_id, "example_item_desc")
+
+    -- The game event on which the item triggers.
+    -- For a list, see here https://github.com/Skirlez/nubbys-forgery/wiki/List-of-Game-Events
+    item.trigger_condition = "1Second"
+
+    -- Alternate trigger for Mutant Tony
+    item.alt_trigger_condition = "PassGoal"
+
+    -- The sprite that should be assigned to the item object
+    -- This sprite was registered in the sprites folder
+    item.sprite = get_mod_sprite("spr_spring_item_upgrade")
+
+    -- 1 is used for normal items, 2 is used for upgraded items
+    item.level = 2
+
+    -- 0 - Item
+    -- 1 - Upgraded Item
+    -- 2 - Corrupted Item
+    -- 3 - Upgraded Corrupted Item
+    -- 4 - Food
+    item.type = 1
+
+    -- Item tiers
+    -- 0 - Common
+    -- 1 - Rare
+    -- 2 - Ultra Rare
+    item.tier = 0
+
+    -- Relates to unused gameplay mechanics. Tinker with at your own risk.
+    item.status = 0
+
+    -- effect_id is a string describing what the item does
+    -- It is only used for identification by other objects in code,
+    -- for example the The Eggy Perk, the perk that retriggers summoning items,
+    -- checks this variable so it knows what to retrigger.
+    -- For a list of base game effects see TODO
+
+    -- You can write anything here, and are welcome to 
+    -- add your effect ID to the database TODO
+    item.effect_id = "nubby_speed_changer"
+
+    -- Which pool this item will show up in
+    -- 0 - Unobtainable
+    -- 1 - Nubby-Mart
+    -- 2 - Black Market
+    -- 3 - Café Nubby
+
+    -- Do not set it to 3.
+    item.pool = 0
+
+    -- price added to the item's base rarity price (can be negative)
+    item.offset_price = 0
+
+    -- Upgrade item ID
+    item.upgrade_item_id = identifier(mod_id, "example_item_upgrade")
+
+    -- odds that affect the item's chance of appearing in early, mid, and endgame.
+    item.odds_weight_early = 5
+    item.odds_weight_mid = 5
+    item.odds_weight_end = 5
+
+    -- Event functions
+    -- These functions are going to be called by the modloader!
+    -- In all event functions, self is the instance of the item running this code
+
+    -- Runs when the item is created
+    item.on_create = fun {
+        
+    }
+
+    -- Runs when a round is initialized (before Nubby is launched)
+    item.on_round_init = fun {
+        self.activated_this_round = false;
+    }
+
+    -- Runs every frame, for every item that exists right now
+    item.on_step = fun {
+        -- Usually items don't use this event
+        -- But you can do whatever you want
+    }
+
+    -- Runs when triggered
+    item.on_trigger = fun {
+        if (self.DisableItem == false and global.GameMode == 1) {
+            with (obj_ParNubby) {
+                if (self.vspeed > 0) {
+                    self.vspeed = 0
+                }
+                self.vspeed -= 20
+            }
+            scr_FX_ItemFire(au_ItemFireGrl)
+            scr_TrackFire()
+            scr_PositionalEv()
+        }
+        scr_ItemQueue()
+    }
+
+    return item
+}
+
+
+
+-- a different way to do it would be like so:
+-- get the base item struct, and only change the fields you need.
+-- an even better alternative would be to have the construct function take a parameter
+-- that decides whether or not the item it returns is upgraded or not.
+
+construct_alt = fun {
+	let item = get_code_file_globals("items/test_item.meow").construct();
+    item.trigger_condition = "1Second"
+    item.level = 2
+    item.type = 1
+    item.pool = 0
+    item.sprite = get_mod_sprite("spr_spring_item_upgrade")
+}

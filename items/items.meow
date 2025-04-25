@@ -1,17 +1,14 @@
 -- In this file you will register your mods' items.
 
--- To register an item, call the register_mod_item(path, item_id) function.
--- It will register the item at path, and set its ID to be "mod_id:item_id"
--- The function will return the item struct.
+-- To register an item, call the register_mod_item(item_struct, item_id) function.
+-- It will register the item struct, and set its ID to be "mod_id:item_id".
 
--- You can also use register_all_mod_items(path, mod_id) to register all items in a path:
--- it will automatically infer the item IDs from the filenames.
+-- You can also use register_all_mod_items(path) to register all items in a path, automatically.
+-- it will automatically infer the item IDs from the filenames, and attempt to call their construct methods.
 
--- Register the first item
-jump_spring = register_mod_item("items/test_item.meow", "example_item")
 
--- for the upgrade, we can reuse the same code file
-jump_spring_plus = register_mod_item("items/test_item.meow", "example_item_upgrade")
+let jump_spring = init_code_file_and_get_globals("items/example_item.meow").construct()
+register_mod_item(jump_spring, "example_item")
 
--- But call this method we defined, which updates relevant variables
-jump_spring_plus.set_upgraded()
+let jump_spring_plus = init_code_file_and_get_globals("items/example_item_upgrade.meow").construct()
+register_mod_item(jump_spring_plus, "example_item_upgrade")

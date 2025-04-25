@@ -7,5 +7,6 @@
     "target_modloader_version" : 1,
 
     "entrypoint_path" : "mod.meow",
-    "translation_folder_path" : "trans"
+    "translations_path" : "trans",
+    "compile_all_code_on_load" : false
 }
