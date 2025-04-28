@@ -1,6 +1,6 @@
 -- In this file you will register your mods' sprites.
 
--- You should use the register_mod_sprite(sprite, mod_id, name) function provided.
+-- You should use the register_mod_sprite(sprite, name) function provided.
 -- That way, you can access your sprite again with get_mod_sprite(mod_id, name), and it will
 -- be cleaned up for you automatically when your mod is unloaded.
 
@@ -12,12 +12,21 @@
 
 
 
-local spring_sprite_path = mod_get_path("sprites/spr_spring_item.png");
+let spring_sprite_path = mod_get_path("sprites/spr_spring_item.png");
 spring_sprite = sprite_add(spring_sprite_path, 16, false, false, 48, 48);
 
 register_mod_sprite(spring_sprite, "spr_spring_item")
 
-local spring_upgrade_sprite_path = mod_get_path("sprites/spr_spring_item_upgrade.png");
+let spring_upgrade_sprite_path = mod_get_path("sprites/spr_spring_item_upgrade.png");
 spring_upgrade_sprite = sprite_add(spring_upgrade_sprite_path, 16, false, false, 48, 48);
 
 register_mod_sprite(spring_upgrade_sprite, "spr_spring_item_upgrade")
+
+
+-- Origin at 58x70, as is standard for 117x141 perk sprites
+let bible_sprite_path = mod_get_path("sprites/spr_bible_perk.png");
+bible_sprite = sprite_add(bible_sprite_path, 36, false, false, 58, 70);
+-- Standard speed for perk sprites
+sprite_set_speed(bible_sprite, 20, spritespeed_framespersecond)
+
+register_mod_sprite(bible_sprite, "spr_bible_perk")

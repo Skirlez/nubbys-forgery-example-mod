@@ -7,6 +7,7 @@ Each line is formatted like so:
 "key","string"
 ```
 On the left is the translation key, and on the right is the string the key resolves to.
+**You are allowed to have a trailing comma, it does not matter.**
 
 Good practice: the key that you add should be prefixed with your mod's string ID, to avoid conflicts with other mods.
 

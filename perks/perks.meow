@@ -1,0 +1,37 @@
+-- In this file you can register your mod's perks.
+
+-- To register an item, call the register_mod_perk(perk_struct, perk_id) function.
+-- It will register the perk struct, and set its ID to be "mod_id:perk_id".
+
+-- You can also use register_all_mod_perks(path) to register all items in a path, automatically.
+-- it will automatically infer the perk IDs from the filenames, and attempt to call their `construct()` methods.
+-- If a code file doesn't have a `construct()` method, it will error about it and skip to the next perk.
+
+
+
+
+let bible_perk = init_code_file_and_get_globals("perks/example_perk.meow").construct()
+register_mod_perk(bible_perk, "bible_perk")
+
+
+-- Below is code made for the Bible Perk's 24 Pegs Popped Trigger condition
+
+popped24 = 0
+mod_id = global.currently_executing_mod.mod_id
+
+-- Use the "on_game_event" happening to find out when the "PegPop" Game Event is fired.
+-- Count how many are popped to trigger our own 24Popped event
+get_happening("on_game_event").subscribe(fun (argument_struct) {
+	if (argument_struct.event_name == "PegPop") {
+		popped24 += 1
+		if (popped24 == 24) {
+			scr_GameEv(identifier(mod_id, "24Popped"))
+			popped24 = 0
+		}
+	}
+})
+-- reset our count when round starts
+get_happening("on_prepare_round").subscribe(fun (argument_struct) {
+	show_message("prepare_round")
+	popped24 = 0
+})

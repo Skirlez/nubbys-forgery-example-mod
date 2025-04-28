@@ -1,0 +1,105 @@
+construct = fun {
+	-- Reliable way to get your own mod ID
+	let mod_id = global.currently_executing_mod.mod_id
+
+	-- Create the perk struct
+	let perk = {}
+
+	-- The translation key of the perk's name
+	perk.display_name = identifier(mod_id, "example_perk_name")
+
+    -- identifier is a quick way to combine our mod ID and another string with a semicolon.
+    -- So in the call above, the result will be "example_mod:example_item_name"
+
+    -- The translation key of the item's description
+	-- Since this description is dynamic and gets updated using code, we might as well leave this empty.
+	perk.description = identifier(mod_id, "example_perk_desc")
+
+    -- The sprite that should be assigned to the item object
+    -- This sprite was registered in the sprites folder
+    perk.sprite = get_mod_sprite("spr_bible_perk")
+
+    -- The game event on which the perk triggers.
+    -- For a list, see here https://github.com/Skirlez/nubbys-forgery/wiki/List-of-Game-Events
+
+	-- This will use our custom trigger condition, "example_mod:24Popped".
+	perk.trigger_condition = identifier(mod_id, "24Popped")
+
+    -- Tiers:
+    -- 0 - Common
+    -- 1 - Rare
+    -- 2 - Ultra-Rare
+	perk.tier = 0
+
+	-- Type
+	-- Common and and perks obtainable through the capsules use 0
+	-- Rare and perks that can only be obtained through food use 1
+	-- Ultra-Rare perk use 2
+	perk.type = 0
+
+    -- Which pool this perk will show up in
+    -- 0 - Unobtainable
+	-- 1 - Capsules
+	perk.pool = 1
+
+	-- Perk trigger effect color
+	-- Catspeak supports colors in this format: #RRGGBB
+	perk.trigger_fx_color = #FFAAEE
+
+	-- This variable controls whether or not
+	-- To draw an additional window under the description
+	-- Displaying a certain game mechanic.
+	-- As of now, the only possible value is 1,
+	-- which shows you what disabled items are.
+	-- It is only used by The Snakey Perk.
+	perk.additional_info_type = 0
+
+
+
+
+
+	-- Runs when the perk is created
+	perk.on_create = fun {
+		self.focused_slot = 1
+
+		-- Initialize our dynamic description
+		self.MyDesc = evaluate_description()
+	}
+
+	-- Runs when the perk is triggered
+	perk.on_trigger = fun {
+		if (self.DisablePerk == false and global.GameMode == 1)
+		{
+			scr_FX_PerkFire()
+			if (self.focused_slot != 7) {
+				scr_ForceTrigger(self.focused_slot, 2)
+				self.focused_slot += 1
+			}
+			else {
+				self.focused_slot = 1
+			}
+
+			
+			self.MyDesc = evaluate_description()
+		}
+		scr_PerkQueue()
+	}
+
+	-- This is a function defined and called by us, not the modloader
+	evaluate_description = fun {
+		-- This function will return an updated description for the item
+		-- Our perk instance holds the perk struct
+		let perk = self.perk
+
+		-- Get the top part of the description (trigger condition)
+		let part_1 = scr_Text(perk.trigger_condition, "\n")
+
+		-- Get the bottom part of the description filled with the current focused slot
+		let part_2 = scr_Text(perk.description, "\n", self.focused_slot)
+		-- Join together
+		return string_concat(part_1, part_2)
+	}
+
+	-- Return our perk struct so it can be registered in perks.meow
+	return perk
+}

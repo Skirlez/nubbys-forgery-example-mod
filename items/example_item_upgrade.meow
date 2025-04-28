@@ -5,14 +5,21 @@ construct = fun {
     -- Reliable way to get your own mod ID
     let mod_id = global.currently_executing_mod.mod_id
 
-    -- The struct we are creating
-    item = {}
+    -- Create the item struct
+    let item = {}
 
-    -- display_name: The translation key of the item's name
+    -- The translation key of the item's name
     item.display_name = identifier(mod_id, "example_item_upgrade_name")
+
+    -- identifier is a quick way to combine our mod ID and another string with a semicolon.
+    -- So in the call above, the result will be "example_mod:example_item_upgrade_name"
 
     -- The translation key of the item's description
     item.description = identifier(mod_id, "example_item_desc")
+
+    -- The sprite that should be assigned to the item object
+    -- This sprite was registered in the sprites folder
+    item.sprite = get_mod_sprite("spr_spring_item_upgrade")
 
     -- The game event on which the item triggers.
     -- For a list, see here https://github.com/Skirlez/nubbys-forgery/wiki/List-of-Game-Events
@@ -21,9 +28,6 @@ construct = fun {
     -- Alternate trigger for Mutant Tony
     item.alt_trigger_condition = "PassGoal"
 
-    -- The sprite that should be assigned to the item object
-    -- This sprite was registered in the sprites folder
-    item.sprite = get_mod_sprite("spr_spring_item_upgrade")
 
     -- 1 is used for normal items, 2 is used for upgraded items
     item.level = 2
@@ -35,10 +39,10 @@ construct = fun {
     -- 4 - Food
     item.type = 1
 
-    -- Item tiers
+    -- Tiers:
     -- 0 - Common
     -- 1 - Rare
-    -- 2 - Ultra Rare
+    -- 2 - Ultra-Rare
     item.tier = 0
 
     -- Relates to unused gameplay mechanics. Tinker with at your own risk.
@@ -82,17 +86,7 @@ construct = fun {
     item.on_create = fun {
         
     }
-
-    -- Runs when a round is initialized (before Nubby is launched)
-    item.on_round_init = fun {
-        self.activated_this_round = false;
-    }
-
-    -- Runs every frame, for every item that exists right now
-    item.on_step = fun {
-        -- Usually items don't use this event
-        -- But you can do whatever you want
-    }
+    
 
     -- Runs when triggered
     item.on_trigger = fun {

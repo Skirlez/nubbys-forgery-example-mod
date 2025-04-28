@@ -1,11 +1,11 @@
--- In this file you will register your mods' items.
+-- In this file you can register your mod's items.
 
 -- To register an item, call the register_mod_item(item_struct, item_id) function.
 -- It will register the item struct, and set its ID to be "mod_id:item_id".
 
 -- You can also use register_all_mod_items(path) to register all items in a path, automatically.
--- it will automatically infer the item IDs from the filenames, and attempt to call their construct methods.
-
+-- it will automatically infer the item IDs from the filenames, and attempt to call their `construct()` methods.
+-- If an item file doesn't have a `construct()` method, it will error about it and skip to the next item.
 
 let jump_spring = init_code_file_and_get_globals("items/example_item.meow").construct()
 register_mod_item(jump_spring, "example_item")
