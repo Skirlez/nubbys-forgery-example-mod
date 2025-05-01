@@ -24,6 +24,9 @@ by the game's code.
 - [#ffffff] sets the color of the text after it. In this case, the text is set to white (the color is in hex format).
 For example: All item descriptions start with [#ffffff] so their text is white.
 
+- [sprite_index,image_index] draws a sprite at a certain index. 
+For example: [spr_ITArrow,0] draws the arrow sprite that every item/perk trigger has.
+
 ## Fallback
 If you don't want to bother with translations... You don't have to! If the game can't find a key, as a fallback measure it resolves the key to the key itself.
 

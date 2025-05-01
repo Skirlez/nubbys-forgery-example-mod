@@ -4,6 +4,6 @@
 
 
 "example_mod:example_perk_name","The Bible Perk",
-"example_mod:example_perk_desc","[#e6ffe6]{a}*Force-triggers the item in the FOCUS slot, twice.{a}*On trigger, FOCUS moves one slot to the right.{a}*Rests on [#ffb3ff]SLOT #7[#ffffff].{a}(FOCUS slot: #{b})",
+"example_mod:example_perk_desc","[#e6ffe6]{a}*Force-triggers the item in the FOCUS slot, twice.{a}*On trigger, FOCUS moves one slot to the right.{a}*Rests on [#ffb3ff]SLOT #7[#e6ffe6], and wraps around to [#ffb3ff]SLOT #1[#e6ffe6]. {a}(FOCUS slot: #{b})",
 
 "example_mod:24Popped","[#ffd500]24 pegs popped [spr_ITArrow,0]"

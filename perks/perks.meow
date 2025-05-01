@@ -19,19 +19,17 @@ register_mod_perk(bible_perk, "bible_perk")
 popped24 = 0
 mod_id = global.currently_executing_mod.mod_id
 
--- Use the "on_game_event" happening to find out when the "PegPop" Game Event is fired.
--- Count how many are popped to trigger our own 24Popped event
-get_happening("on_game_event").subscribe(fun (argument_struct) {
-	if (argument_struct.event_name == "PegPop") {
-		popped24 += 1
-		if (popped24 == 24) {
-			scr_GameEv(identifier(mod_id, "24Popped"))
-			popped24 = 0
-		}
+-- Subscribe to the PegPop event and start counting
+-- Once we reach 24, trigger "example_mod:24Popped"
+subscribe_to_game_event("PegPop", fun {
+	popped24 += 1
+	if (popped24 == 24) {
+		scr_GameEv(identifier(mod_id, "24Popped"))
+		popped24 = 0
 	}
 })
--- reset our count when round starts
-get_happening("on_prepare_round").subscribe(fun (argument_struct) {
-	show_message("prepare_round")
+
+subscribe_to_game_event("NubbyLaunchPerk", fun {
+	-- Reset our count
 	popped24 = 0
 })

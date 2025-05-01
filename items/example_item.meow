@@ -20,10 +20,10 @@ construct = fun {
 
     -- The game event on which the item triggers.
     -- For a list, see here https://github.com/Skirlez/nubbys-forgery/wiki/List-of-Game-Events
-    item.trigger_condition = "1andHalfSecond"
+    item.game_event = "1andHalfSecond"
 
-    -- Alternate trigger condition's game event for mutant tony
-    item.alt_trigger_condition = "PassGoal"
+    -- Alternate Game Event for mutant tony
+    item.alt_game_event = "PassGoal"
 
     -- 1 is used for normal items, 2 is used for upgraded items
     item.level = 1

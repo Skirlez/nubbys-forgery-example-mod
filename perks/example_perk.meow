@@ -19,11 +19,11 @@ construct = fun {
     -- This sprite was registered in the sprites folder
     perk.sprite = get_mod_sprite("spr_bible_perk")
 
-    -- The game event on which the perk triggers.
+    -- The Game Event on which the perk triggers.
     -- For a list, see here https://github.com/Skirlez/nubbys-forgery/wiki/List-of-Game-Events
 
-	-- This will use our custom trigger condition, "example_mod:24Popped".
-	perk.trigger_condition = identifier(mod_id, "24Popped")
+	-- This will use our custom Game Event, "example_mod:24Popped".
+	perk.game_event = identifier(mod_id, "24Popped")
 
     -- Tiers:
     -- 0 - Common
@@ -39,7 +39,7 @@ construct = fun {
 
     -- Which pool this perk will show up in
     -- 0 - Unobtainable
-	-- 1 - Capsules
+	-- 1 - Loot Capsules
 	perk.pool = 1
 
 	-- Perk trigger effect color
@@ -53,10 +53,6 @@ construct = fun {
 	-- which shows you what disabled items are.
 	-- It is only used by The Snakey Perk.
 	perk.additional_info_type = 0
-
-
-
-
 
 	-- Runs when the perk is created
 	perk.on_create = fun {
@@ -92,7 +88,7 @@ construct = fun {
 		let perk = self.perk
 
 		-- Get the top part of the description (trigger condition)
-		let part_1 = scr_Text(perk.trigger_condition, "\n")
+		let part_1 = scr_Text(perk.game_event, "\n")
 
 		-- Get the bottom part of the description filled with the current focused slot
 		let part_2 = scr_Text(perk.description, "\n", self.focused_slot)
