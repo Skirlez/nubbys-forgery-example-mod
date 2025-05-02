@@ -9,13 +9,13 @@ construct = fun {
 	perk.display_name = identifier(mod_id, "example_perk_name")
 
     -- identifier is a quick way to combine our mod ID and another string with a semicolon.
-    -- So in the call above, the result will be "example_mod:example_item_name"
+    -- So in the call above, the result will be "example_mod:example_perk_name"
 
-    -- The translation key of the item's description
+    -- The translation key of the perk's description
 	-- Since this description is dynamic and gets updated using code, we might as well leave this empty.
 	perk.description = identifier(mod_id, "example_perk_desc")
 
-    -- The sprite that should be assigned to the item object
+    -- The sprite that should be assigned to the perk object
     -- This sprite was registered in the sprites folder
     perk.sprite = get_mod_sprite("spr_bible_perk")
 
@@ -34,7 +34,7 @@ construct = fun {
 	-- Type
 	-- Common and and perks obtainable through the capsules use 0
 	-- Rare and perks that can only be obtained through food use 1
-	-- Ultra-Rare perk use 2
+	-- Ultra-Rare perks use 2
 	perk.type = 0
 
     -- Which pool this perk will show up in
@@ -83,7 +83,7 @@ construct = fun {
 
 	-- This is a function defined and called by us, not the modloader
 	evaluate_description = fun {
-		-- This function will return an updated description for the item
+		-- This function will return an updated description for the perk
 		-- Our perk instance holds the perk struct
 		let perk = self.perk
 
