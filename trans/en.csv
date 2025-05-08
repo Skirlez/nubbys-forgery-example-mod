@@ -7,3 +7,6 @@
 "example_mod:example_perk_desc","[#e6ffe6]{a}*Force-triggers the item in the FOCUS slot, twice.{a}*On trigger, FOCUS moves one slot to the right.{a}*Rests on [#ffb3ff]SLOT #7[#e6ffe6], and wraps around to [#ffb3ff]SLOT #1[#e6ffe6]. {a}(FOCUS slot: #{b})",
 
 "example_mod:24Popped","[#ffd500]24 pegs popped [spr_ITArrow,0]"
+
+"example_mod:example_supervisor_name","Gambler Tony"
+"example_mod:example_supervisor_desc","*Rerolls in all shops cost 2 coins.{a}*Cost increases by 1 after each reroll.{a}*Cost resets after leaving shop.{a}*You have infinite rerolls."
