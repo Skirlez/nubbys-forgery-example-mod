@@ -71,7 +71,8 @@ construct = fun {
     item.offset_price = 0
 
     -- Upgrade item ID
-    item.upgrade_item_id = identifier(mod_id, "example_item_upgrade")
+    -- unupgraded Squid looks at this variable to know what's the item's unupgraded variant, so you should set it to that
+    item.upgrade_item_id = identifier(mod_id, "example_item")
 
     -- odds that affect the item's chance of appearing in early, mid, and endgame.
     item.odds_weight_early = 5
