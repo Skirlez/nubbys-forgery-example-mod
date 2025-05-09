@@ -23,7 +23,7 @@ construct = fun {
     item.game_event = "1andHalfSecond"
 
     -- Alternate Game Event for mutant tony
-    item.alt_game_event = "PassGoal"
+    item.alt_game_event = "HitWall3"
 
     -- 1 is used for normal items, 2 is used for upgraded items
     item.level = 1
@@ -70,8 +70,9 @@ construct = fun {
     -- Rare, Ultra-Rare - 10
     item.offset_price = 0
 
-    -- Upgrade's item ID
-    item.upgrade_item_id = identifier(mod_id, "example_item_upgrade")
+    -- Pair item's ID
+    -- Essentially this is the upgraded item's ID
+    item.pair_id = identifier(mod_id, "example_item_upgrade")
 
     -- odds that affect the item's chance of appearing in early, mid, and endgame.
     item.odds_weight_early = 5

@@ -58,7 +58,6 @@ construct = fun {
 	sv.on_create = fun {
 		-- Runs when the run begins
 		-- Create a functional object that will make it so we can only reroll when we have enough money, and subtracts money when we reroll
-
 		let object_depth = instance_find(obj_ItemMGMT, 0).depth - 4 -- Create the object 1 depth above all the reroll buttons
 		reroll_object = instance_create_depth(0, 0, object_depth, obj_functional_object, {
 			on_create : fun {
