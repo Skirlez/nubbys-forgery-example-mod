@@ -58,6 +58,10 @@ construct = fun {
 	sv.on_create = fun {
 		-- Runs when the run begins
 		-- Create a functional object that will make it so we can only reroll when we have enough money, and subtracts money when we reroll
+
+		-- Disable Pickle Rat
+		instance_find(obj_ItemMGMT, 0).InItemPool[50] = 0
+
 		let object_depth = instance_find(obj_ItemMGMT, 0).depth - 4 -- Create the object 1 depth above all the reroll buttons
 		reroll_object = instance_create_depth(0, 0, object_depth, obj_functional_object, {
 			on_create : fun {
@@ -89,7 +93,6 @@ construct = fun {
 						}
 
 						-- If button was pressed, reroll limit will be 0
-						-- If player has the upgrade/eats the food that increases the reroll limit, they'll get a free reroll,
 						-- we only check once reroll limit hits 0
 						if (instance.RerollLimit == 0) {
 							instance.RerollLimit = 1
