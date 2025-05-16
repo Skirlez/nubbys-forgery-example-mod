@@ -6,24 +6,24 @@ construct = fun {
 	let perk = {}
 
 	-- The translation key of the perk's name
-	perk.display_name = identifier(mod_id, "example_perk_name")
+	perk.display_name = mod_identifier(mod_id, "example_perk_name")
 
-    -- identifier is a quick way to combine our mod ID and another string with a semicolon.
+    -- mod_identifier is a quick way to combine our mod ID and another string with a semicolon.
     -- So in the call above, the result will be "example_mod:example_perk_name"
 
     -- The translation key of the perk's description
 	-- Since this description is dynamic and gets updated using code, we might as well leave this empty.
-	perk.description = identifier(mod_id, "example_perk_desc")
+	perk.description = mod_identifier(mod_id, "example_perk_desc")
 
     -- The sprite that should be assigned to the perk object
     -- This sprite was registered in the sprites folder
-    perk.sprite = get_mod_sprite("spr_bible_perk")
+    perk.sprite = mod_get_sprite("spr_bible_perk")
 
     -- The Game Event on which the perk triggers.
     -- For a list, see here https://github.com/Skirlez/nubbys-forgery/wiki/List-of-Game-Events
 
 	-- This will use our custom Game Event, "example_mod:24Popped".
-	perk.game_event = identifier(mod_id, "24Popped")
+	perk.game_event = mod_identifier(mod_id, "24Popped")
 
     -- Tiers:
     -- 0 - Common

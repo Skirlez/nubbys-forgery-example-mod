@@ -1,9 +1,9 @@
  -- Runs when the mod is loaded
 on_load = fun {
-    execute_mod_code_file("sprites/sprites.meow")
-    execute_mod_code_file("items/items.meow")
-    execute_mod_code_file("perks/perks.meow")
-    execute_mod_code_file("supervisors/supervisors.meow")
+    mod_execute_code_file("sprites/sprites.meow")
+    mod_execute_code_file("items/items.meow")
+    mod_execute_code_file("perks/perks.meow")
+    mod_execute_code_file("supervisors/supervisors.meow")
 }
 -- Runs when the mod is unloaded
 -- Please clean up any dynamic structures you created here

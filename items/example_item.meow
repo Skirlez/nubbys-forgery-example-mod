@@ -6,17 +6,17 @@ construct = fun {
     let item = {}
 
     -- The translation key of the item's name
-    item.display_name = identifier(mod_id, "example_item_name")
+    item.display_name = mod_identifier(mod_id, "example_item_name")
 
-    -- identifier is a quick way to combine our mod ID and another string with a semicolon.
+    -- mod_identifier is a quick way to combine our mod ID and another string with a semicolon.
     -- So in the call above, the result will be "example_mod:example_item_name"
 
     -- The translation key of the item's description
-    item.description = identifier(mod_id, "example_item_desc")
+    item.description = mod_identifier(mod_id, "example_item_desc")
 
     -- The sprite that should be assigned to the item's object
     -- This sprite was registered in the sprites folder
-    item.sprite = get_mod_sprite("spr_spring_item")
+    item.sprite = mod_get_sprite("spr_spring_item")
 
     -- The game event on which the item triggers.
     -- For a list, see here https://github.com/Skirlez/nubbys-forgery/wiki/List-of-Game-Events
@@ -72,7 +72,7 @@ construct = fun {
 
     -- Pair item's ID
     -- Essentially this is the upgraded item's ID
-    item.pair_id = identifier(mod_id, "example_item_upgrade")
+    item.pair_id = mod_identifier(mod_id, "example_item_upgrade")
 
     -- odds that affect the item's chance of appearing in early, mid, and endgame.
     item.odds_weight_early = 5

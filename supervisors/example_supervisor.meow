@@ -5,9 +5,9 @@ construct = fun {
     -- Create the supervisor struct
     let sv = {}
 
-	sv.display_name = identifier(mod_id, "example_supervisor_name");
+	sv.display_name = mod_identifier(mod_id, "example_supervisor_name");
 
-	sv.description = identifier(mod_id, "example_supervisor_desc");
+	sv.description = mod_identifier(mod_id, "example_supervisor_desc");
 
 
 
@@ -18,11 +18,11 @@ construct = fun {
 	-- Any states/emotions you don't supply use the idle sprite.
 	
 	sv.sprites = {
-		idle_neutral : get_mod_sprite("spr_gambler_tony_idle_neutral"),
-		preview : get_mod_sprite("spr_gambler_tony_preview"),
+		idle_neutral : mod_get_sprite("spr_gambler_tony_idle_neutral"),
+		preview : mod_get_sprite("spr_gambler_tony_preview"),
 
 		-- you can also include more states/emotions here. For example:
-		-- angry : get_mod_sprite("spr_gambler_tony_angry"),
+		-- angry : mod_get_sprite("spr_gambler_tony_angry"),
 		-- would have supplied the angry sprite, if I had made one...
 
 		-- List of states:
@@ -135,7 +135,6 @@ construct = fun {
 					}
 					draw_set_halign(fa_center)
 					draw_set_valign(fa_middle)
-
 					let price_length = string_width(self.costs[i])
 					draw_text(instance.x, (instance.y + 45), self.costs[i])
 					draw_sprite(spr_GoldCoinSm, 0, (instance.x + price_length + 10), (instance.y + 45))

@@ -1,5 +1,6 @@
 -- One way of having upgrade items is just copying the way you make the base item,
--- and changing the variables you need.
+-- and changing the variables you need. 
+-- See the bottom of the file for an alternative.
 
 construct = fun {
     -- Reliable way to get your own mod ID
@@ -9,17 +10,17 @@ construct = fun {
     let item = {}
 
     -- The translation key of the item's name
-    item.display_name = identifier(mod_id, "example_item_upgrade_name")
+    item.display_name = mod_identifier(mod_id, "example_item_upgrade_name")
 
     -- identifier is a quick way to combine our mod ID and another string with a semicolon.
     -- So in the call above, the result will be "example_mod:example_item_upgrade_name"
 
     -- The translation key of the item's description
-    item.description = identifier(mod_id, "example_item_desc")
+    item.description = mod_identifier(mod_id, "example_item_desc")
 
     -- The sprite that should be assigned to the item object
     -- This sprite was registered in the sprites folder
-    item.sprite = get_mod_sprite("spr_spring_item_upgrade")
+    item.sprite = mod_get_sprite("spr_spring_item_upgrade")
 
     -- The game event on which the item triggers.
     -- For a list, see here https://github.com/Skirlez/nubbys-forgery/wiki/List-of-Game-Events
@@ -72,7 +73,7 @@ construct = fun {
 
     -- Pair Item ID
     -- Unupgraded Squid looks at this variable to know what's the item's unupgraded variant, so you should set it to that
-    item.pair_id = identifier(mod_id, "example_item")
+    item.pair_id = mod_identifier(mod_id, "example_item")
 
     -- odds that affect the item's chance of appearing in early, mid, and endgame.
     item.odds_weight_early = 5
@@ -110,18 +111,20 @@ construct = fun {
 
 
 
--- a different way to do it would be like so:
+-- A different way to do it would be like so:
 -- get the base item struct, and only change the fields you need.
 -- an even better alternative would be to have the construct function take a parameter
 -- that decides whether or not the item it returns is upgraded or not.
 
 construct_alt = fun {
-	let item = get_code_file_globals("items/test_item.meow").construct();
+    let mod_id = global.currently_executing_mod.mod_id
+	let item = get_code_file_globals("items/example_item.meow").construct()
     item.game_event = "1Second"
     item.alt_game_event = "HitWall2"
     item.level = 2
     item.type = 1
     item.pool = 0
-    item.pair_id = identifier(mod_id, "example_item")
-    item.sprite = get_mod_sprite("spr_spring_item_upgrade")
+    item.pair_id = mod_identifier(mod_id, "example_item")
+    item.sprite = mod_get_sprite("spr_spring_item_upgrade")
+    return item
 }

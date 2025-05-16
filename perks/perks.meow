@@ -1,35 +1,32 @@
 -- In this file you can register your mod's perks.
 
--- To register an item, call the register_mod_perk(perk_struct, perk_id) function.
+-- To register an item, call the mod_register_perk(perk_struct, perk_id) function.
 -- It will register the perk struct, and set its ID to be "mod_id:perk_id".
 
--- You can also use register_all_mod_perks(path) to register all items in a path, automatically.
--- it will automatically infer the perk IDs from the filenames, and attempt to call their `construct()` methods.
--- If a code file doesn't have a `construct()` method, it will error about it and skip to the next perk.
 
-
-
-
-let bible_perk = init_code_file_and_get_globals("perks/example_perk.meow").construct()
-register_mod_perk(bible_perk, "bible_perk")
+let bible_perk = mod_get_code_file_globals("perks/example_perk.meow").construct()
+mod_register_perk(bible_perk, "example_perk")
 
 
 -- Below is code made for the Bible Perk's 24 Pegs Popped Trigger condition
 
 popped24 = 0
-mod_id = global.currently_executing_mod.mod_id
+let mod_id = global.currently_executing_mod.mod_id
+
+-- name our event example_mod:24Popped to not potentially interfere with other mods
+game_event_name = mod_identifier(mod_id, "24Popped");
 
 -- Subscribe to the PegPop event and start counting
 -- Once we reach 24, trigger "example_mod:24Popped"
-subscribe_to_game_event("PegPop", fun {
+mod_subscribe_to_game_event("PegPop", fun {
 	popped24 += 1
 	if (popped24 == 24) {
-		scr_GameEv(identifier(mod_id, "24Popped"))
+		scr_GameEv(game_event_name)
 		popped24 = 0
 	}
 })
 
-subscribe_to_game_event("NubbyLaunchPerk", fun {
+mod_subscribe_to_game_event("NubbyLaunchPerk", fun {
 	-- Reset our count
 	popped24 = 0
 })
