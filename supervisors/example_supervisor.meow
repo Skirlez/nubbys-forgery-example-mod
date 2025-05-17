@@ -5,8 +5,14 @@ construct = fun {
     -- Create the supervisor struct
     let sv = {}
 
+	-- The translation key of the supervisor's name
 	sv.display_name = mod_identifier(mod_id, "example_supervisor_name");
 
+    -- mod_identifier is a quick way to combine our mod ID and another string with a semicolon.
+    -- So in the call above, the result will be "example_mod:example_supervisor_name"
+
+
+	-- The translation key of the supervisor's description
 	sv.description = mod_identifier(mod_id, "example_supervisor_desc");
 
 
@@ -25,7 +31,10 @@ construct = fun {
 		-- angry : mod_get_sprite("spr_gambler_tony_angry"),
 		-- would have supplied the angry sprite, if I had made one...
 
-		-- List of states:
+		-- On the preview screen:
+		-- preview_clicked
+
+		-- Gameplay states:
 		-- angry
 		-- evil
 		-- head_swivel
@@ -41,17 +50,18 @@ construct = fun {
 		-- Unused states:
 		-- happy
 		-- idle_grimace
-		
-
-
 	}
 
+
+	sv.clicked_sounds = [];
+	
+	sv.go_sound = au_Tony_VOGo;
 	-- Supervisor selection name color
 	-- Catspeak supports colors in this format: #RRGGBB
 	sv.name_color = #000000
 
 	-- Cost in stars
-	-- I'd recommend 0
+	-- Can be set to 0
 	sv.cost = 0
 
 

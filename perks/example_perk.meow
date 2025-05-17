@@ -54,29 +54,35 @@ construct = fun {
 	-- It is only used by The Snakey Perk.
 	perk.additional_info_type = 0
 
+
+	-- We're making this variable global (to this file), because if it belonged to the instance,
+	-- You'd have a situation where two different perks have a different FOCUS slot,
+	-- but only one is shown as of v1.3.1
+	focused_slot = 1
+
 	-- Runs when the perk is created
 	perk.on_create = fun {
-		self.focused_slot = 1
-
 		-- Initialize our dynamic description
 		self.MyDesc = evaluate_description()
 	}
 
 	-- Runs when the perk is triggered
 	perk.on_trigger = fun {
-		if (self.DisablePerk == false and global.GameMode == 1)
-		{
+		if (self.DisablePerk == false and global.GameMode == 1) {
 			scr_FX_PerkFire()
-			if (self.focused_slot != 7) {
-				scr_ForceTrigger(self.focused_slot, 2)
-				self.focused_slot += 1
+			if (focused_slot != 7) {
+				scr_ForceTrigger(focused_slot, 2)
+				focused_slot += 1
 			}
 			else {
-				self.focused_slot = 1
+				focused_slot = 1
 			}
 
-			
-			self.MyDesc = evaluate_description()
+			-- Update descriptions of all instances, not just ours
+			-- We don't know which one the game chooses to display
+			with (self.object_index) {
+				self.MyDesc = evaluate_description()
+			}
 		}
 		scr_PerkQueue()
 	}
@@ -91,7 +97,7 @@ construct = fun {
 		let part_1 = scr_Text(perk.game_event, "\n")
 
 		-- Get the bottom part of the description filled with the current focused slot
-		let part_2 = scr_Text(perk.description, "\n", self.focused_slot)
+		let part_2 = scr_Text(perk.description, "\n", focused_slot)
 		-- Join together
 		return string_concat(part_1, part_2)
 	}

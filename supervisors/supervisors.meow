@@ -2,4 +2,4 @@
 
 
 let gambler_tony = mod_get_code_file_globals("supervisors/example_supervisor.meow").construct()
-mod_register_supervisor(gambler_tony, "example_supervisor")
+mod_register_supervisor(gambler_tony, "example_supervisor")	

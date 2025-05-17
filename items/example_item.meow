@@ -28,32 +28,23 @@ construct = fun {
     -- 1 is used for normal items, 2 is used for upgraded items
     item.level = 1
     
-    -- Item types:
-    -- 0 - Item
-    -- 1 - Upgraded Item
-    -- 2 - Corrupted Item
-    -- 3 - Upgraded Corrupted Item
-    -- 4 - Food
-    item.type = 0
-
     -- Tiers:
     -- 0 - Common
     -- 1 - Rare
     -- 2 - Ultra-Rare
     item.tier = 0
 
-    -- Relates to unused gameplay mechanics. Tinker with at your own risk.
-    item.status = 0
+    -- Augments:
+    -- Normal items use "none"
+    -- Corrupted items use "corrupted"
+    item.augment = "none"
 
-    -- effect_id is a string describing what the item does
+    -- effect is a string describing what the item does
     -- It is only used for identification by other objects in code,
     -- for example the The Eggy Perk, the perk that retriggers summoning items,
     -- checks this variable so it knows what to retrigger.
     -- For a list of base game effects see TODO
-
-    -- You can write anything here, and are welcome to 
-    -- add your effect ID to the database TODO
-    item.effect_id = "nubby_speed_changer"
+    item.effect = "nubby_speed_changer"
 
     -- Which pool this item will show up in
     -- 0 - Unobtainable
