@@ -1,12 +1,12 @@
 {
     "mod_id" : "example_mod",
     "display_name" : "Example Mod",
-    "description" : "An example mod made to show how mods are structured",
+    "description" : "An example mod made to show the mod structure and modloader API",
     "credits" : ["skirlez"],
     "version" : "1",
     "target_modloader_version" : 1,
 
-    "entrypoint_path" : "mod.meow",
+    "entrypoint_path" : "mod.gml",
     "translations_path" : "trans",
     "compile_all_code_on_load" : false
 }
