@@ -2,14 +2,14 @@ construct = function() {
 	// Reliable way to get your own mod ID
 	var mod_id = global.cmod.mod_id
 
-    // Create the supervisor struct
-    var sv = {}
+	// Create the supervisor struct
+	var sv = {}
 
 	// The translation key of the supervisor's name
 	sv.display_name = mod_identifier(mod_id, "example_supervisor_name");
 
-    // mod_identifier is a quick way to combine our mod ID and another string with a semicolon.
-    // So in the call above, the result will be "example_mod:example_supervisor_name"
+	// mod_identifier is a quick way to combine our mod ID and another string with a semicolon.
+	// So in the call above, the result will be "example_mod:example_supervisor_name"
 
 
 	// The translation key of the supervisor's description
@@ -175,9 +175,10 @@ construct = function() {
 		})
 	}
 
-	sv.on_destroy = function() {
-		// We created reroll_object in a global scope, so we can still access it here
-		instance_destroy(reroll_object)
+	sv.on_destroy = function(this) {
+		if (instance_exists(this.reroll_object)) {
+			instance_destroy(reroll_object)
+		}
 	}
 
 

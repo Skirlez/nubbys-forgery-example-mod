@@ -1,10 +1,10 @@
 // Runs when the mod is loaded
 on_load = function() {
-    mod_execute_code("functions.gml")
-    mod_execute_code("sprites/sprites.gml")
-    mod_execute_code("items/items.gml")
-    mod_execute_code("perks/perks.gml")
-    mod_execute_code("supervisors/supervisors.gml")
+	mod_execute_code("functions.gml")
+	mod_execute_code("sprites/sprites.gml")
+	mod_execute_code("items/items.gml")
+	mod_execute_code("perks/perks.gml")
+	mod_execute_code("supervisors/supervisors.gml")
 }
 // Runs when the mod is unloaded
 // Please clean up any dynamic structures you created here
